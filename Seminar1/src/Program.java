@@ -24,6 +24,59 @@ public class Program {
         }
         System.out.println();
 
+        counter.set(0); // Обнулили счетчик
+
+        long startTime = System.currentTimeMillis();
+        System.out.printf("(1. Рекурсия) Число Фибоначчи для значения %d равно %d; Кол-во итераций: %d\n", +
+                10, fb1(10, counter), counter.get());
+        long endTime = System.currentTimeMillis();
+        long processingTime = endTime - startTime;
+        System.out.printf("(1. Рекурсия) Операция выполнена за %d мс\n", processingTime);
+
+        counter.set(0); // Обнулили счетчик
+
+        startTime = System.currentTimeMillis();
+        System.out.printf("(2. Рекурсия) Число Фибоначчи для значения %d равно %d; Кол-во итераций: %d\n", +
+                30, fb1(30, counter), counter.get());
+        endTime = System.currentTimeMillis();
+        processingTime = endTime - startTime;
+        System.out.printf("(2. Рекурсия) Операция выполнена за %d мс\n", processingTime);
+
+        counter.set(0); // Обнулили счетчик
+
+        startTime = System.currentTimeMillis();
+        System.out.printf("(3. Рекурсия) Число Фибоначчи для значения %d равно %d; Кол-во итераций: %d\n", +
+                44, fb1(44, counter), counter.get());
+        endTime = System.currentTimeMillis();
+        processingTime = endTime - startTime;
+        System.out.printf("(3. Рекурсия) Операция выполнена за %d мс\n", processingTime);
+
+        counter.set(0); // Обнулили счетчик
+
+        startTime = System.currentTimeMillis();
+        System.out.printf("(4. Линейная) Число Фибоначчи для значения %d равно %d; Кол-во итераций: %d\n", +
+                10, fb2(10, counter), counter.get());
+        endTime = System.currentTimeMillis();
+        processingTime = endTime - startTime;
+        System.out.printf("(4. Линейная) Операция выполнена за %d мс\n", processingTime);
+
+        counter.set(0); // Обнулили счетчик
+
+        startTime = System.currentTimeMillis();
+        System.out.printf("(5. Линейная) Число Фибоначчи для значения %d равно %d; Кол-во итераций: %d\n", +
+                30, fb2(30, counter), counter.get());
+        endTime = System.currentTimeMillis();
+        processingTime = endTime - startTime;
+        System.out.printf("(5. Линейная) Операция выполнена за %d мс\n", processingTime);
+
+        counter.set(0); // Обнулили счетчик
+
+        startTime = System.currentTimeMillis();
+        System.out.printf("(6. Линейная) Число Фибоначчи для значения %d равно %d; Кол-во итераций: %d\n", +
+                44, fb2(44, counter), counter.get());
+        endTime = System.currentTimeMillis();
+        processingTime = endTime - startTime;
+        System.out.printf("(6. Линейная) Операция выполнена за %d мс\n", processingTime);
     }
 
     /**
@@ -89,8 +142,29 @@ public class Program {
 
     /**
      * Последовательность Фибоначчи
+     * Рекурсия
+     * Экспоненциальная сложность
      */
 
-    // 1:10
+
+    public static long fb1(int num, AtomicInteger counter) {
+        counter.getAndIncrement();
+        if (num == 0 || num == 1) return num;
+        return fb1(num - 1, counter) + fb1(num - 2, counter);
+    }
+
+    // Линеная сложность
+    public static long fb2(int num, AtomicInteger counter) {
+        if (num == 0 || num == 1) return num;
+
+        long[] numbers = new long[num + 1];
+        numbers[0] = 0;
+        numbers[1] = 1;
+        for (int i = 2; i <= num; i++) {
+            numbers[i] = numbers[i - 1] + numbers[i - 2];
+            counter.getAndIncrement();
+        }
+        return numbers[num]; // numbers.length - 1
+    }
 
 }
