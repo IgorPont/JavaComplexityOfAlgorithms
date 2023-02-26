@@ -12,10 +12,15 @@ public class Main {
 
         printList(linkedList);
 
-        linkedList.directSort(new StudentAgeComparator(SortType.Ascending));
+//        linkedList.directSort(new StudentAgeComparator(SortType.Ascending));
+//        printList(linkedList);
+//        linkedList.directSort(new StudentAgeComparator(SortType.Descending));
+//        printList(linkedList);
+
+        linkedList.revertGo();
         printList(linkedList);
-        linkedList.directSort(new StudentAgeComparator(SortType.Descending));
-        printList(linkedList);
+
+
     }
 
     public  static <T> void printList(LinkedList<T> list){
